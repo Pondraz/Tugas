@@ -1,0 +1,116 @@
+//DimasNarendraPutra
+//A11.2021.13715
+//tugas queue
+#include<iostream>
+using namespace std;
+#define MAX 8
+
+struct Antrian {
+    int data[MAX];
+    int head;
+    int tail;
+};
+
+Antrian antre;
+void create();
+bool isEmpty();
+bool isFull();
+void enqueue(int);
+int dequeue();
+void tampil();
+void Clear();
+
+
+int main(){
+    create();
+    int pil,data1;
+    cout << "Tugas Queue SD\n";
+    do{
+        cout << endl;
+        cout << "1.Memasukan data\n";
+        cout << "2.Delete satu data\n";
+        cout << "3.Reset data\n";
+        cout << "4.Cetak data\n";
+        cout << endl;
+        cout << "Pilihan : ";
+        cin >> pil;
+        cout << endl;
+        switch(pil){
+        case 1:
+            cout << "Entry Data : ";
+            cin >> data1;
+            enqueue(data1);
+            break;
+        case 2:
+            dequeue();
+            break;
+        case 3:
+            Clear();
+            break;
+        case 4:
+            tampil();
+            break;
+        }
+    }while(pil != 9);
+
+    return 0;
+}
+
+void create(){
+    antre.head = antre.tail =-1;
+}
+
+bool isEmpty(){
+    if(antre.tail == -1){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool isFull(){
+    if(antre.tail == MAX - 1){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void enqueue(int data){
+    if(isEmpty()){
+        antre.head = antre.tail = 0;
+        antre.data[antre.tail] = data;
+    }else{
+        antre.tail++;
+        antre.data[antre.tail] = data;
+    }
+}
+
+int dequeue(){
+    int i;
+    int e = antre.data[antre.head];
+    for(i = antre.head;i < antre.tail - 1;i++){
+        antre.data[i] = antre.data[i+1];
+    }
+    antre.tail--;
+    return e;
+}
+
+void tampil(){
+    if(isEmpty()){
+        cout << "Kosong" << endl;
+
+    }else{
+        for (int i = 0; i <= antre.tail; i++){
+            cout << antre.data[i] << " ";
+        }
+    }
+}
+
+void Clear(){
+     antre.head=antre.tail=-1;
+}
